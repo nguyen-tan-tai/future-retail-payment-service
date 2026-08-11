@@ -1,0 +1,41 @@
+spring:
+   application:
+      name: payment-service
+
+   config:
+      import: classpath:futureretail-observability.yml
+
+   datasource:
+    url: jdbc:postgresql://${PAYMENT_DB_HOST:localhost}:${PAYMENT_DB_PORT:5432}/${PAYMENT_DB_NAME:future-retail}
+    username: ${PAYMENT_DB_USER:postgres}
+    password: ${PAYMENT_DB_PASS:postgres}
+    driver-class-name: org.postgresql.Driver
+
+   jpa:
+      hibernate:
+         ddl-auto: update
+      show-sql: false
+      properties:
+         hibernate:
+            format_sql: true
+   kafka:
+      bootstrap-servers: localhost:29092
+      producer:
+         key-serializer: org.apache.kafka.common.serialization.StringSerializer
+         value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+         properties:
+            '[schema.registry.url]': http://localhost:8081
+            '[specific.avro.reader]': true
+            '[auto.register.schemas]': true
+   web:
+      error:
+         whitelabel:
+            enabled: true
+
+app:
+   kafka:
+      topics:
+         paymentEvents: payment-events
+         riskAlertEvents: risk-alert-events
+server:
+   port: 18084
