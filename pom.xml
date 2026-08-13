@@ -11,11 +11,11 @@
     </parent>
     <groupId>com.future-retail</groupId>
     <artifactId>future-retail-payment-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>2026.09.00</version>
     <properties>
-        <version>1.0.0-SNAPSHOT</version>
         <java.version>21</java.version>
         <confluent.version>8.3.0</confluent.version>
+        <flyway.version>13.2.0</flyway.version>
     </properties>
     <repositories>
         <repository>
@@ -24,6 +24,11 @@
         </repository>
     </repositories>
     <dependencies>
+        <dependency>
+            <groupId>com.futureretail</groupId>
+            <artifactId>future-retail-tracing-starter</artifactId>
+            <version>2026.09.00</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-kafka</artifactId>
@@ -39,6 +44,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,25 +77,37 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>schemas</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.futureretail</groupId>
+            <artifactId>future-retail-schemas</artifactId>
+            <version>2026.09.00</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.48</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--TEST-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-kafka-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-flyway</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
     </dependencies>
     <build>

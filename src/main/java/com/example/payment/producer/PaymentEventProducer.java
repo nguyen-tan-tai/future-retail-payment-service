@@ -1,7 +1,7 @@
 package com.example.payment.producer;
 
 import com.example.payment.config.KafkaProperties;
-import com.example.schema.payment.PaymentEvent;
+import com.futureretail.schema.payment.PaymentEvent;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 

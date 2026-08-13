@@ -33,12 +33,9 @@ public class PaymentService {
     }
 
     /**
-     * TODO: Replace direct Kafka publish with Transactional Outbox. Current flow:
-     * REST -> PostgreSQL -> Kafka Problem: - PostgreSQL commit succeeds but Kafka
-     * publish fails => event lost. - Kafka publish succeeds but DB transaction
-     * rolls back => inconsistent state. Future solution: - Write business data +
-     * outbox record in the same DB transaction. - Use Outbox Poller or Debezium CDC
-     * to publish to Kafka. - Mark outbox record as published after successful send.
+     * TODO: Replace direct Kafka publish with Transactional Outbox. Current flow: REST -> PostgreSQL -> Kafka Problem: - PostgreSQL commit succeeds but Kafka publish fails => event lost. - Kafka
+     * publish succeeds but DB transaction rolls back => inconsistent state. Future solution: - Write business data + outbox record in the same DB transaction. - Use Outbox Poller or Debezium CDC to
+     * publish to Kafka. - Mark outbox record as published after successful send.
      */
     public Payment createPayment(PaymentCreateRequest request, RequestContext context) {
         paymentValidator.validateOrThrow(request);

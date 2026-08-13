@@ -1,7 +1,7 @@
 package com.example.payment.mapper;
 
 import com.example.payment.model.Payment;
-import com.example.schema.payment.PaymentEvent;
+import com.futureretail.schema.payment.PaymentEvent;
 import org.springframework.stereotype.Component;
 
 @Component

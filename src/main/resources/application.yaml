@@ -1,41 +1,47 @@
 spring:
-   application:
-      name: payment-service
-
-   config:
-      import: classpath:futureretail-observability.yml
-
-   datasource:
-    url: jdbc:postgresql://${PAYMENT_DB_HOST:localhost}:${PAYMENT_DB_PORT:5432}/${PAYMENT_DB_NAME:future-retail}
+  application:
+    name: payment-service
+  config:
+    import: classpath:futureretail-observability.yml
+  datasource:
+    url: jdbc:postgresql://${PAYMENT_DB_HOST:localhost}:${PAYMENT_DB_PORT:5432}/${PAYMENT_DB_NAME:future-retail-payment}
     username: ${PAYMENT_DB_USER:postgres}
     password: ${PAYMENT_DB_PASS:postgres}
     driver-class-name: org.postgresql.Driver
-
-   jpa:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
       hibernate:
-         ddl-auto: update
-      show-sql: false
+        format_sql: true
+  flyway:
+    locations: classpath:db/migration
+    enabled: true
+    validate-on-migrate: true
+    repair-on-migrate: true
+  kafka:
+    bootstrap-servers: localhost:29092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       properties:
-         hibernate:
-            format_sql: true
-   kafka:
-      bootstrap-servers: localhost:29092
-      producer:
-         key-serializer: org.apache.kafka.common.serialization.StringSerializer
-         value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-         properties:
-            '[schema.registry.url]': http://localhost:8081
-            '[specific.avro.reader]': true
-            '[auto.register.schemas]': true
-   web:
-      error:
-         whitelabel:
-            enabled: true
-
+        '[schema.registry.url]': http://localhost:8081
+        '[specific.avro.reader]': true
+        '[auto.register.schemas]': true
+  web:
+    error:
+      whitelabel:
+        enabled: true
 app:
-   kafka:
-      topics:
-         paymentEvents: payment-events
-         riskAlertEvents: risk-alert-events
+  kafka:
+    topics:
+      paymentEvents: payment-events
+      riskAlertEvents: risk-alert-events
+  security:
+    auth-server-jwks-url: ${AUTH_SERVER_JWKS_URL:http://localhost:18081/oauth2/jwks}
 server:
-   port: 18084
+  port: ${SERVER_PORT:18084}
+id:
+  generator:
+    worker-id: ${WORKER_ID:1}
