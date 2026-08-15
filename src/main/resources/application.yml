@@ -1,8 +1,6 @@
 spring:
   application:
     name: payment-service
-  config:
-    import: classpath:futureretail-observability.yml
   datasource:
     url: jdbc:postgresql://${PAYMENT_DB_HOST:localhost}:${PAYMENT_DB_PORT:5432}/${PAYMENT_DB_NAME:future-retail-payment}
     username: ${PAYMENT_DB_USER:postgres}

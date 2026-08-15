@@ -26,6 +26,11 @@
     <dependencies>
         <dependency>
             <groupId>com.futureretail</groupId>
+            <artifactId>future-retail-core-starter</artifactId>
+            <version>2026.09.00</version>
+        </dependency>
+        <dependency>
+            <groupId>com.futureretail</groupId>
             <artifactId>future-retail-tracing-starter</artifactId>
             <version>2026.09.00</version>
         </dependency>
